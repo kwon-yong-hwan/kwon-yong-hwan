@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Solution {
+    public int[] solution(int[] answers) {
+        
+        //학생들의 답안 패턴입력
+        int [] student1 = {1,2,3,4,5};//5
+        int [] student2 = {2,1,2,3,2,4,2,5};//8
+        int [] student3 = {3,3,1,1,2,2,4,4,5,5};//10
+        
+        //정답수를 체크하는 리스트선언
+        List<Integer> list = new ArrayList<Integer>();
+        
+        //초기화
+        for(int i = 0; i < 3; i++) list.add(0);
+        
+        //반복문을 돌면서 학생이 정답을 입력하면 인덱스에 +1
+        for(int i=0;i<answers.length;i++) {
+        	if (answers[i] == student1[i%5]){
+        		list.set(0, list.get(0)+1);
+        	}
+        	if (answers[i] == student2[i%8]){ 
+        		list.set(1, list.get(1)+1);
+        	}
+        	if (answers[i] == student3[i%10]){
+        		list.set(2, list.get(2)+1);
+        	}
+        }
+        
+        //리스트의 최대값(최대정답자 학생)
+        int max = Collections.max(list);
+        
+        //최대정답자 학생을 고름(동점자도 체크해서 리스트에 추가)
+        List<Integer> list2 = new ArrayList<Integer>();
+        for(int i=0; i<3;i++) {
+        	if(max==list.get(i)) {
+        		list2.add(i+1);
+        	}
+        }
+        
+        //최대정답자 학생(혹은 들)의 사이즈만큼 리턴할 배열에 담음
+        int[] answer = new int[list2.size()];
+        for(int i = 0; i <list2.size(); i++) {
+        	answer[i] = list2.get(i);
+        }
+        
+        return answer;
+    }
+}
