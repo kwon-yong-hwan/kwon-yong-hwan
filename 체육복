@@ -1,0 +1,31 @@
+class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+    	//체육복을 하나만 가지고 도난 당하지않은 사람
+    	int answer = n-lost.length;
+    	
+    	//여분이 있는 사람중 도난당한 사람을 answer에 추가
+    	for(int i=0;i<lost.length;i++) {
+    		for(int j=0;j<reserve.length;j++) {
+    			if(lost[i]==reserve[j]) {
+    				answer++;
+    				lost[i]=-1;
+    				reserve[j]=-1;
+    				break;
+    			}
+    		}
+    	}
+    	
+    	//여분이 있는사람은 앞이나 뒤에 도난당한사람이 있으면 빌려주고 answer에 추가
+    	for(int i=0;i<lost.length;i++) {
+    		for(int j=0;j<reserve.length;j++) {
+    			if(lost[i]==reserve[j]+1||lost[i]==reserve[j]-1) {
+    				answer++;
+    				reserve[j]=-1;
+    				break;
+    			}
+    		}
+    	}
+        
+        return answer;
+    }
+}
