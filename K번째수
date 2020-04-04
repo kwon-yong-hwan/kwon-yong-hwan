@@ -1,0 +1,26 @@
+package exK번째수;
+
+import java.util.Arrays;
+
+class Solution {
+    public int[] solution(int[] array, int[][] commands) {
+        //리턴할 배열
+    	int[] answer = new int[commands.length];
+    	
+    	//배열자르기
+    	for(int i=0;i<commands.length;i++) {
+    		//자른배열저장
+    		int[] cut = new int[commands[i][1]-commands[i][0]+1];
+    		int a=0;
+    		for(int j=commands[i][0]-1;j<commands[i][1];j++) {
+    			cut[a]=array[j];
+    			a++;
+    		}
+    		//배열정렬
+    		Arrays.sort(cut);
+    		//리턴할 배열에 자른배열담기
+    		answer[i]=cut[commands[i][2]-1];
+    	}
+        return answer;
+    }
+}
